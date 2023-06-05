@@ -23,17 +23,15 @@ namespace WPF_FrontEnd
     {
         private Button previouslyPressedYearBT;
         private Button previouslyPressedMonthBT;
-        private ObservableCollection<Item> bindingTest = new ObservableCollection<Item>();
+        private ObservableCollection<Item> currentNotes = new ObservableCollection<Item>();
 
-        public ObservableCollection<Item> BindingTest { get => bindingTest; set => bindingTest = value; }
+        public ObservableCollection<Item> CurrentNotes { get => currentNotes; set => currentNotes = value; }
 
         public MainWindow()
         {
             InitializeComponent();
             FirstCalendarInit();
             SetCurrentWeek();
-            DataContext = this;
-            previouslyPressedYearBT = DefaultYearButton;
         }
 
         private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -69,17 +67,7 @@ namespace WPF_FrontEnd
         }
         private void ImageAwesome_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //EditWindow wjj = new EditWindow();
-            //wjj.ShowDialog();
-            Item item = new Item();
-            item.Title = "TestTitle TestTitle TestTitle";
-            item.Time = "19:00 - 20:00";
-            Color color = (Color)ColorConverter.ConvertFromString("#f1f1f1");
-            item.Color = new SolidColorBrush(color);
-            item.Icon = FontAwesome.WPF.FontAwesomeIcon.CircleThin;
-            item.IconBell = FontAwesome.WPF.FontAwesomeIcon.Bell;
-            BindingTest.Add(item);
-
+            // add note here
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -147,6 +135,13 @@ namespace WPF_FrontEnd
         }
         private void FirstCalendarInit()
         {
+            // enable data binding
+            DataContext = this;
+
+            // needed for year selection
+            previouslyPressedYearBT = DefaultYearButton;
+
+            // dates setup
             MainCalendar.SelectedDate = DateTime.Now;
             MonthNameLabel.Text = MainCalendar.DisplayDate.ToString("MMMM");
             MonthNameLabelRight.Text = MainCalendar.DisplayDate.ToString("MMMM");

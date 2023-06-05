@@ -152,7 +152,7 @@
                     </Grid>
                 </Border>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Height="320">
-                    <ListBox ItemsSource="{Binding BindingTest}" Background="Transparent">
+                    <ListBox ItemsSource="{Binding CurrentNotes}" Background="Transparent">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel x:Name="WPTest" Orientation="Vertical"/>
