@@ -27,7 +27,7 @@ namespace RESTServer.Models
         public Note()
         {
 
-        }
+        } 
 
         public Note(string title, string time, int userID, DateTime noteDate, bool isChecked)
         {

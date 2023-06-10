@@ -1,7 +1,11 @@
-﻿using System;
+﻿using RESTServer.Models;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF_FrontEnd.RESTUtils;
 
 namespace WPF_FrontEnd
 {
@@ -35,7 +40,7 @@ namespace WPF_FrontEnd
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(PasswordTextBox.Password);
+            
         }
     }
 }
