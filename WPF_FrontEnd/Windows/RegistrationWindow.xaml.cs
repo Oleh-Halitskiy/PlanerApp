@@ -28,5 +28,14 @@ namespace WPF_FrontEnd
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+        private void RegButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();    
+        }
     }
 }

@@ -46,6 +46,7 @@ namespace WPF_FrontEnd
             RegistrationWindow registrationWindow = new RegistrationWindow();
             Hide();
             registrationWindow.ShowDialog();
+            Show(); 
         }
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
