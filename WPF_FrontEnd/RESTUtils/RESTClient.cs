@@ -58,5 +58,23 @@ namespace WPF_FrontEnd.RESTUtils
             string response = client.Get(request).Content.ToString();
             return JsonSerializer.Deserialize<List<Note>>(response);
         }
+        public void InsertNote(Note note)
+        {
+            var request = new RestRequest(url + noteRoute);
+            request.AddJsonBody(note);
+            client.Post(request);
+        }
+        public void DeleteNote(int noteID)
+        {
+            var request = new RestRequest(url + noteRoute);
+            request.AddParameter("ID", noteID);
+            client.Delete(request);
+        }
+        public void UpdateNote(Note note)
+        {
+            var request = new RestRequest(url + noteRoute);
+            request.AddJsonBody(note);
+            client.Patch(request);
+        }
     }
 }
