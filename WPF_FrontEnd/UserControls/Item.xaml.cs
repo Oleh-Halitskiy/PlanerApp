@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RESTServer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,15 @@ namespace WPF_FrontEnd.UserControls
     /// </summary>
     public partial class Item : UserControl
     {
-        public Item()
+        private Note currentNote;
+
+        public Note CurrentNote { get => currentNote; set => currentNote = value; }
+        public Item(Note note)
         {
             InitializeComponent();
+            CurrentNote = note;
+            Title = note.Title;
+            Time = note.Time;
         }
         public string Title
         {
