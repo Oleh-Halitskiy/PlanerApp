@@ -21,16 +21,33 @@ namespace WPF_FrontEnd.UserControls
     /// </summary>
     public partial class Item : UserControl
     {
-        private Note currentNote;
-
-        public Note CurrentNote { get => currentNote; set => currentNote = value; }
-        public Item(Note note)
+        
+        public Item()
         {
             InitializeComponent();
-            CurrentNote = note;
-            Title = note.Title;
-            Time = note.Time;
+            FirstInit();
         }
+        public void SetNote(Note note)
+        {
+            Note = note;
+            Title = Note.Title;
+            Time = Note.Time;
+        }
+        public void FirstInit()
+        {
+            item.Color = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+            item.Icon = FontAwesome.WPF.FontAwesomeIcon.CircleThin;
+            item.IconBell = FontAwesome.WPF.FontAwesomeIcon.Bell;
+        }
+
+        public static readonly DependencyProperty NoteProperty = DependencyProperty.Register("Note", typeof(Note), typeof(Item));
+
+        public Note Note
+        {
+            get { return (Note)GetValue(NoteProperty); }
+            set { SetValue(NoteProperty, value); }
+        }
+
         public string Title
         {
             get { return (string)GetValue(TitleProperty); }
@@ -74,5 +91,18 @@ namespace WPF_FrontEnd.UserControls
         }
 
         public static readonly DependencyProperty IconBellProperty = DependencyProperty.Register("IconBell", typeof(FontAwesome.WPF.FontAwesomeIcon), typeof(Item));
+
+        private void EditButton_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void DeleteButton_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void CheckButton_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

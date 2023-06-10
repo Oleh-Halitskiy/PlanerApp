@@ -18,15 +18,15 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Note title:" Grid.Row="0" Grid.Column="0" Margin="10" />
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="10" />
+            <TextBox x:Name="TitleTextBox" Grid.Row="0" Grid.Column="1" Margin="10" />
 
             <Label Content="Note content:" Grid.Row="1" Grid.Column="0" Margin="10" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="10" />
+            <TextBox x:Name="TimeTextBox" Grid.Row="1" Grid.Column="1" Margin="10" />
 
-            <Button Content="Edit" Grid.Row="5" Grid.Column="1" Margin="133,10,0,10" HorizontalAlignment="Left" Width="151" />
+            <Button Content="Save changes" Grid.Row="5" Grid.Column="1" Margin="133,10,0,10" HorizontalAlignment="Left" Width="151" />
 
             <Button Content="Return" Grid.Row="5" Margin="10,10,0,10"
-                HorizontalAlignment="Left" Width="109" Grid.Column="1" />
+                HorizontalAlignment="Left" Width="109" Grid.Column="1" Click="ReturnButton_Click" />
         </Grid>
     </Border>
 </Window>  

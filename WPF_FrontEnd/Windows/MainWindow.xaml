@@ -152,7 +152,7 @@
                     </Grid>
                 </Border>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Height="320">
-                    <ListBox ItemsSource="{Binding CurrentNotes}" Background="Transparent">
+                    <ListBox ItemsSource="{Binding CurrentItems}" Background="Transparent">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel x:Name="WPTest" Orientation="Vertical"/>
@@ -160,7 +160,7 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <us:Item Title="{Binding Title}" Time="{Binding Time}" Color="{Binding Color}" Icon="{Binding Icon}" IconBell="{Binding IconBell}" HorizontalContentAlignment="Stretch"/>
+                                <us:Item Title="{Binding Title}" Time="{Binding Time}" Color="{Binding Color}" Icon="{Binding Icon}" IconBell="{Binding IconBell}" Note="{Binding Note}" HorizontalContentAlignment="Stretch"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

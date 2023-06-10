@@ -1,7 +1,10 @@
-﻿using System;
+﻿using RESTServer.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +15,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF_FrontEnd.AppVars;
+using WPF_FrontEnd.RESTUtils;
 using WPF_FrontEnd.UserControls;
 
 namespace WPF_FrontEnd
@@ -21,17 +26,40 @@ namespace WPF_FrontEnd
     /// </summary>
     public partial class MainWindow : Window
     {
+        private RESTClient WebClient;
         private Button previouslyPressedYearBT;
         private Button previouslyPressedMonthBT;
-        private ObservableCollection<Item> currentNotes = new ObservableCollection<Item>();
+        private List<Note> todaysNotes;
 
-        public ObservableCollection<Item> CurrentNotes { get => currentNotes; set => currentNotes = value; }
+        private ObservableCollection<Item> currentItems;
+
+        public ObservableCollection<Item> CurrentItems { get => currentItems; set => currentItems = value; }
 
         public MainWindow()
         {
             InitializeComponent();
             FirstCalendarInit();
+        }
+
+        private void FirstCalendarInit()
+        {
+            currentItems = new ObservableCollection<Item>();
+            WebClient = new RESTClient();
+            todaysNotes = new List<Note>();
             SetCurrentWeek();
+            LoadUserNotes();
+
+            // enable data binding
+            DataContext = this;
+
+            // needed for year selection
+            previouslyPressedYearBT = DefaultYearButton;
+
+            // dates setup
+            MainCalendar.SelectedDate = DateTime.Now;
+            MonthNameLabel.Text = MainCalendar.DisplayDate.ToString("MMMM");
+            MonthNameLabelRight.Text = MainCalendar.DisplayDate.ToString("MMMM");
+            CurrentDayNumber.Text = MainCalendar.SelectedDate.Value.Day.ToString();
         }
 
         private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -67,7 +95,7 @@ namespace WPF_FrontEnd
         }
         private void ImageAwesome_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // add note here
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -132,20 +160,7 @@ namespace WPF_FrontEnd
         {
             CurrentDayNumber.Text = MainCalendar.SelectedDate.Value.Day.ToString();
             DayNameLabelRight.Text = MainCalendar.SelectedDate.Value.DayOfWeek.ToString();
-        }
-        private void FirstCalendarInit()
-        {
-            // enable data binding
-            DataContext = this;
-
-            // needed for year selection
-            previouslyPressedYearBT = DefaultYearButton;
-
-            // dates setup
-            MainCalendar.SelectedDate = DateTime.Now;
-            MonthNameLabel.Text = MainCalendar.DisplayDate.ToString("MMMM");
-            MonthNameLabelRight.Text = MainCalendar.DisplayDate.ToString("MMMM");
-            CurrentDayNumber.Text = MainCalendar.SelectedDate.Value.Day.ToString();
+            FilterNotesByDate(MainCalendar.SelectedDate.Value);
         }
         private void SetCurrentWeek()
         {
@@ -161,6 +176,25 @@ namespace WPF_FrontEnd
                         return;
                     }
                 }
+            }
+        }
+        private void LoadUserNotes()
+        {
+            GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
+        }
+        private void FilterNotesByDate(DateTime date)
+        {
+            todaysNotes = GlobalVariables.CurrentNotes.Where(note => note.NoteDate.Date == date).ToList();
+            SetObservableCollectionFromList(todaysNotes);
+        }
+        private void SetObservableCollectionFromList(List<Note> notes)
+        {
+            CurrentItems.Clear();
+            foreach (Note note in notes)
+            {
+                Item item = new Item();
+                item.SetNote(note);
+                currentItems.Add(item);
             }
         }
     }

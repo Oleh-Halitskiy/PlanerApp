@@ -59,9 +59,9 @@ namespace WPF_FrontEnd
                     {
                         GlobalVariables.CurrentUser = tempuser;
                         MainWindow mainWindow = new MainWindow();
+                        Hide();
                         mainWindow.ShowDialog();
-                        PasswordTextBox.Password = "";
-                        LoginTextBox.Text = "";
+                        Close();
                     }
                     else
                     {

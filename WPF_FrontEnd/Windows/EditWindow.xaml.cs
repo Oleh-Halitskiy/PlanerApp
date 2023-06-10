@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RESTServer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +20,23 @@ namespace WPF_FrontEnd
     /// </summary>
     public partial class EditWindow : Window
     {
-        public EditWindow()
+        private Note note;
+        public EditWindow(Note note)
         {
             InitializeComponent();
+            this.note = note;
+            TitleTextBox.Text = note.Title;
+            TimeTextBox.Text = note.Time;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+        }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();    
         }
     }
 }
