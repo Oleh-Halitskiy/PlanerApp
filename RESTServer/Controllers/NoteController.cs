@@ -19,11 +19,10 @@ namespace RESTServer.Controllers
             IEnumerable<Note> Inote = await InoteTask;
             return Inote;
         }
-        [HttpPut(Name = "InsertNote")]
-        public void Put(string Title, string Time, int UserID, DateTime NoteDate, bool IsChecked)
+        [HttpPost(Name = "InsertNote")]
+        public void Post([FromBody] Note noteBody)
         {
-            Note note = new Note(Title, Time, UserID, NoteDate, IsChecked);
-            noteOperator.InsertNote(note);
+            noteOperator.InsertNote(noteBody);
         }
         [HttpDelete(Name = "DeleteNote")]
         public void Delete(int ID)

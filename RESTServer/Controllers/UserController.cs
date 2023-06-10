@@ -10,6 +10,7 @@ namespace RESTServer.Controllers
     public class UserController : ControllerBase
     {
         UserOperator userOperator = new UserOperator();
+
         [HttpGet(Name = "ByLogin")]
         public async Task<IEnumerable<User>> Get(string login)
         {
@@ -17,11 +18,10 @@ namespace RESTServer.Controllers
             IEnumerable<User> Iuser = await IuserTask;
             return Iuser;
         }
-        [HttpPut(Name = "InsertUser")]
-        public void Put(string FirstName, string LastName, string Login, string Password, string Email)
+        [HttpPost(Name = "InsertUser")]
+        public void Post([FromBody] User userbody)
         {
-            User user = new User(FirstName, LastName, Login, Password, Email);
-            userOperator.InsertUser(user);
+            userOperator.InsertUser(userbody);
         }
     }
 }
