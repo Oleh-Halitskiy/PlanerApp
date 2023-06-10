@@ -9,6 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RESTServer\RESTServer.csproj" />
   </ItemGroup>
 
 </Project>
