@@ -30,14 +30,9 @@ namespace RESTServer.Controllers
             noteOperator.DeleteNoteByID(ID);
         }
         [HttpPatch(Name = "UpdateNote")]
-        public void Patch(int ID, string Title, string Time, bool isChecked)
+        public void Patch([FromBody] Note noteBody)
         {
-            Note note = new Note();
-            note.Title = Title;
-            note.Time = Time;
-            note.IsChecked = isChecked;
-            note.ID = ID;
-            noteOperator.UpdateNote(note);
+            noteOperator.UpdateNote(noteBody);
         }
     }
 }
