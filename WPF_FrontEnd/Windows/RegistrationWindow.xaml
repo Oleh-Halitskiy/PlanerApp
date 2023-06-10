@@ -22,19 +22,19 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="First Name:" Grid.Row="0" Grid.Column="0" Margin="10" />
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="10" />
+            <TextBox x:Name="FNTextBox" Grid.Row="0" Grid.Column="1" Margin="10" />
 
             <Label Content="Last Name:" Grid.Row="1" Grid.Column="0" Margin="10" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="10" />
+            <TextBox x:Name="LNTextBox" Grid.Row="1" Grid.Column="1" Margin="10" />
 
             <Label Content="Login:" Grid.Row="2" Grid.Column="0" Margin="10" />
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="10" />
+            <TextBox x:Name="LoginTextBox" Grid.Row="2" Grid.Column="1" Margin="10" />
 
             <Label Content="Password:" Grid.Row="3" Grid.Column="0" Margin="10" />
-            <PasswordBox Grid.Row="3" Grid.Column="1" Margin="10" />
+            <PasswordBox x:Name="PasswordBox" Grid.Row="3" Grid.Column="1" Margin="10" />
 
             <Label Content="Email:" Grid.Row="4" Grid.Column="0" Margin="10" />
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="10" />
+            <TextBox x:Name="EmailTextBox" Grid.Row="4" Grid.Column="1" Margin="10" />
 
             <Button Content="Register" Grid.Row="5" Grid.Column="1" Margin="0,1,0,10" HorizontalAlignment="Center" Width="274" Click="RegButton_Click"/>
 
