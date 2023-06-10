@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
         mc:Ignorable="d" AllowsTransparency="True" Background="Transparent" WindowStyle="None"  
-        Title="MainWindow" Height="280" Width="400" MouseDown="Window_MouseDown">
+        Title="MainWindow" Height="300" Width="400" MouseDown="Window_MouseDown">
     <Border CornerRadius="20" BorderBrush="#C73F69" BorderThickness="2" Padding="6" Background="GhostWhite">
         <Grid>
             <Grid.RowDefinitions>
@@ -36,10 +36,11 @@
             <Label Content="Email:" Grid.Row="4" Grid.Column="0" Margin="10" />
             <TextBox Grid.Row="4" Grid.Column="1" Margin="10" />
 
-            <Button Content="Register" Grid.Row="5" Grid.Column="1" Margin="133,10,0,10" HorizontalAlignment="Left" Width="151" />
+            <Button Content="Register" Grid.Row="5" Grid.Column="1" Margin="0,1,0,10" HorizontalAlignment="Center" Width="274" Click="RegButton_Click"/>
 
-            <Button Content="Back to Login" Grid.Row="5" Margin="10,10,0,10"
-                HorizontalAlignment="Left" Width="109" Grid.Column="1" />
+            <Button Content="Back to Login" Grid.Row="6" Margin="0,0,0,10"
+                HorizontalAlignment="Center" Width="274" Grid.Column="1" Click="BackButton_Click" />
+
         </Grid>
     </Border>
 </Window>  
