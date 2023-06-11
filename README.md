@@ -23,7 +23,7 @@ Written in C# programming language, the Calendar Notes App showcases the capabil
 2. Connect to your server
 3. Right click on your "Databases" folder
 4. Select "Import Data-tier Application"
-5. Follow wizard to import and select "database.bacpac" from checkout folder
+5. Follow wizard to import and select "database.bacpac" from checkout folder (Make sure you named your DB "FinalDB")
 
 **Installation**:
 1. Clone repo
