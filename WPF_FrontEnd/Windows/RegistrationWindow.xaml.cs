@@ -13,10 +13,7 @@ namespace WPF_FrontEnd
     {
         private RESTClient WebClient = new RESTClient();
 
-        public RegistrationWindow()
-        {
-            InitializeComponent();
-        }
+        public RegistrationWindow() => InitializeComponent();
 
         private void RegButton_Click(object sender, RoutedEventArgs e)
         {
