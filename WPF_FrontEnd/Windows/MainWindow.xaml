@@ -109,7 +109,7 @@
                     </StackPanel>
                 </StackPanel>
 
-                <TextBlock Text="5 tasks- 2 dates left" Foreground="#EBA5BB" FontSize="16" Margin="35 0 20 0"/>
+                <TextBlock x:Name="CurrentNotesCount" Text="5 tasks- 2 dates left" Foreground="#EBA5BB" FontSize="16" Margin="35 0 20 0"/>
 
                 <!--Add Notes-->
                 <Border Background="#CD5278" CornerRadius="10" HorizontalAlignment="Center" Width="355" Margin="0 30 0 20" Padding="17 15 5 15">

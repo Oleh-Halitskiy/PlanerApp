@@ -205,6 +205,7 @@ namespace WPF_FrontEnd
         {
             todaysNotes = GlobalVariables.CurrentNotes.Where(note => note.NoteDate.Date == date.Date).ToList();
             SetObservableCollectionFromList(todaysNotes);
+            CurrentNotesCount.Text = $"Welcome, {GlobalVariables.CurrentUser.Login} \nOn this day you have: {CurrentItems.Count.ToString()} task(s)";
         }
 
         /// <summary>
