@@ -1,13 +1,8 @@
 ﻿using RESTServer.Models;
 using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace WPF_FrontEnd.RESTUtils
 {
@@ -17,10 +12,9 @@ namespace WPF_FrontEnd.RESTUtils
         private string userRoute = "User";
         private string noteRoute = "Note";
         RestClient client;
-        public RESTClient()
-        {
-            client = new RestClient();
-        }
+
+        public RESTClient() => client = new RestClient();
+
         // user related requests
         public User GetUserByLogin(string login)
         {

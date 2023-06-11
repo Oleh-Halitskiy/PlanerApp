@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WPF_FrontEnd.UserControls
 {
@@ -21,10 +8,8 @@ namespace WPF_FrontEnd.UserControls
     /// </summary>
     public partial class MenuButton : UserControl
     {
-        public MenuButton()
-        {
-            InitializeComponent();
-        }
+        public MenuButton() => InitializeComponent();
+
         public string Caption
         {
             get { return (string)GetValue(CaptionProperty); }
@@ -32,7 +17,6 @@ namespace WPF_FrontEnd.UserControls
         }
 
         public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register("Caption", typeof(string), typeof(MenuButton));
-
 
         public FontAwesome.WPF.FontAwesomeIcon Icon
         {

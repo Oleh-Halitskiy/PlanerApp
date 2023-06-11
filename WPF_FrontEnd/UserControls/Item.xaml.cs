@@ -1,18 +1,8 @@
 ﻿using RESTServer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WPF_FrontEnd.AppVars;
 using WPF_FrontEnd.RESTUtils;
 
@@ -24,32 +14,6 @@ namespace WPF_FrontEnd.UserControls
     public partial class Item : UserControl
     {
         private RESTClient WebClient;
-        public Item()
-        {
-            InitializeComponent();
-            FirstInit();
-        }
-        public void SetNote(Note note)
-        {
-            Note = note;
-            Title = Note.Title;
-            Time = Note.Time;
-
-            if (Note.IsChecked == true)
-            {
-                Icon = FontAwesome.WPF.FontAwesomeIcon.CheckCircle;
-            }
-            else
-            {
-                Icon = FontAwesome.WPF.FontAwesomeIcon.CircleOutline;
-            }
-        }
-        public void FirstInit()
-        {
-            WebClient = new RESTClient();
-            item.Color = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            item.IconBell = FontAwesome.WPF.FontAwesomeIcon.Bell;
-        }
 
         public static readonly DependencyProperty NoteProperty = DependencyProperty.Register("Note", typeof(Note), typeof(Item));
 
@@ -110,12 +74,43 @@ namespace WPF_FrontEnd.UserControls
             GlobalVariables.MainWindow.RefreshCurrentItems();
 
         }
+
         private void DeleteButton_Click(object sender, MouseButtonEventArgs e)
         {
             WebClient.DeleteNote(Note.ID);
             GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
             GlobalVariables.MainWindow.RefreshCurrentItems();
         }
+
+        public Item()
+        {
+            InitializeComponent();
+            FirstInit();
+        }
+
+        public void FirstInit()
+        {
+            WebClient = new RESTClient();
+            item.Color = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+            item.IconBell = FontAwesome.WPF.FontAwesomeIcon.Bell;
+        }
+
+        public void SetNote(Note note)
+        {
+            Note = note;
+            Title = Note.Title;
+            Time = Note.Time;
+
+            if (Note.IsChecked == true)
+            {
+                Icon = FontAwesome.WPF.FontAwesomeIcon.CheckCircle;
+            }
+            else
+            {
+                Icon = FontAwesome.WPF.FontAwesomeIcon.CircleOutline;
+            }
+        }
+
         private void CheckButton_Click(object sender, MouseButtonEventArgs e)
         {
             if (Note.IsChecked == true)

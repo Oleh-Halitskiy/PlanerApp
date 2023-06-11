@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RESTServer.DatabaseOperators;
 using RESTServer.Models;
 
@@ -18,10 +17,8 @@ namespace RESTServer.Controllers
             IEnumerable<User> Iuser = await IuserTask;
             return Iuser;
         }
+
         [HttpPost(Name = "InsertUser")]
-        public void Post([FromBody] User userbody)
-        {
-            userOperator.InsertUser(userbody);
-        }
+        public void Post([FromBody] User userbody) => userOperator.InsertUser(userbody);
     }
 }

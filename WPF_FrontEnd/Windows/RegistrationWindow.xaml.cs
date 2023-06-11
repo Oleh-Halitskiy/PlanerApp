@@ -1,17 +1,7 @@
 ﻿using RESTServer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WPF_FrontEnd.RESTUtils;
 
 namespace WPF_FrontEnd
@@ -21,16 +11,9 @@ namespace WPF_FrontEnd
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        RESTClient WebClient = new RESTClient();
-        public RegistrationWindow()
-        {
-            InitializeComponent();
-        }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
+        private RESTClient WebClient = new RESTClient();
+
+        public RegistrationWindow() => InitializeComponent();
 
         private void RegButton_Click(object sender, RoutedEventArgs e)
         {
@@ -57,9 +40,13 @@ namespace WPF_FrontEnd
                 MessageBox.Show("One of the fields is empty check your input");
             }
         }
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Close();    
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e) => Close();
     }
 }
