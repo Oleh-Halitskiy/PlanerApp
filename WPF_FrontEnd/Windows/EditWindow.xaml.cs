@@ -12,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF_FrontEnd.AppVars;
+using WPF_FrontEnd.RESTUtils;
+using WPF_FrontEnd.UserControls;
 
 namespace WPF_FrontEnd
 {
@@ -21,9 +24,11 @@ namespace WPF_FrontEnd
     public partial class EditWindow : Window
     {
         private Note note;
+        private RESTClient WebClient;
         public EditWindow(Note note)
         {
             InitializeComponent();
+            WebClient = new RESTClient();
             this.note = note;
             TitleTextBox.Text = note.Title;
             TimeTextBox.Text = note.Time;
@@ -36,7 +41,16 @@ namespace WPF_FrontEnd
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();    
+            Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            note.Title = TitleTextBox.Text;
+            note.Time = TimeTextBox.Text;
+            WebClient.UpdateNote(note);
+            GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
+            Close(); 
         }
     }
 }
