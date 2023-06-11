@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_FrontEnd.AppVars;
+using WPF_FrontEnd.RESTUtils;
 
 namespace WPF_FrontEnd.UserControls
 {
@@ -21,7 +23,7 @@ namespace WPF_FrontEnd.UserControls
     /// </summary>
     public partial class Item : UserControl
     {
-        
+        private RESTClient WebClient;
         public Item()
         {
             InitializeComponent();
@@ -32,11 +34,20 @@ namespace WPF_FrontEnd.UserControls
             Note = note;
             Title = Note.Title;
             Time = Note.Time;
+
+            if (Note.IsChecked == true)
+            {
+                Icon = FontAwesome.WPF.FontAwesomeIcon.CheckCircle;
+            }
+            else
+            {
+                Icon = FontAwesome.WPF.FontAwesomeIcon.CircleOutline;
+            }
         }
         public void FirstInit()
         {
+            WebClient = new RESTClient();
             item.Color = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            item.Icon = FontAwesome.WPF.FontAwesomeIcon.CircleThin;
             item.IconBell = FontAwesome.WPF.FontAwesomeIcon.Bell;
         }
 
@@ -94,15 +105,31 @@ namespace WPF_FrontEnd.UserControls
 
         private void EditButton_Click(object sender, MouseButtonEventArgs e)
         {
+            EditWindow editWindow = new EditWindow(Note);
+            editWindow.ShowDialog();
+            GlobalVariables.MainWindow.RefreshCurrentItems();
 
         }
         private void DeleteButton_Click(object sender, MouseButtonEventArgs e)
         {
-
+            WebClient.DeleteNote(Note.ID);
+            GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
+            GlobalVariables.MainWindow.RefreshCurrentItems();
         }
         private void CheckButton_Click(object sender, MouseButtonEventArgs e)
         {
-
+            if (Note.IsChecked == true)
+            {
+                Icon = FontAwesome.WPF.FontAwesomeIcon.CircleOutline;
+                Note.IsChecked = false;
+                WebClient.UpdateNote(Note);
+            }
+            else
+            {
+                Icon = FontAwesome.WPF.FontAwesomeIcon.CheckCircle;
+                Note.IsChecked = true;
+                WebClient.UpdateNote(Note);
+            }
         }
     }
 }
