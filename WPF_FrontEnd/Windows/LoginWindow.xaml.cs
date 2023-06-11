@@ -1,21 +1,5 @@
-﻿using RESTServer.Models;
-using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WPF_FrontEnd.AppVars;
 using WPF_FrontEnd.RESTUtils;
 
@@ -26,16 +10,19 @@ namespace WPF_FrontEnd
     /// </summary>
     public partial class LoginWindow : Window
     {
-        RESTClient WebClient = new RESTClient();
+        private RESTClient WebClient = new RESTClient();
+
         public LoginWindow()
         {
             InitializeComponent();
         }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -48,6 +35,7 @@ namespace WPF_FrontEnd
             registrationWindow.ShowDialog();
             Show(); 
         }
+
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(LoginTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Password))

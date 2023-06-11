@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using ConfigurationManager = System.Configuration.ConfigurationManager;
+﻿using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace UtilsClasses
 {
