@@ -60,6 +60,7 @@ namespace WPF_FrontEnd
                         GlobalVariables.CurrentUser = tempuser;
                         MainWindow mainWindow = new MainWindow();
                         Hide();
+                        GlobalVariables.MainWindow = mainWindow;
                         mainWindow.ShowDialog();
                         Close();
                     }
