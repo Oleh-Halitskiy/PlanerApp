@@ -30,11 +30,6 @@ namespace WPF_FrontEnd
                 this.DragMove();
         }
 
-        private void ReturnButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             note.Title = TitleTextBox.Text;
@@ -43,5 +38,7 @@ namespace WPF_FrontEnd
             GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
             Close(); 
         }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

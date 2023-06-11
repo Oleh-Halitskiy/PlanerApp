@@ -8,10 +8,7 @@ namespace WPF_FrontEnd.UserControls
     /// </summary>
     public partial class MenuButton : UserControl
     {
-        public MenuButton()
-        {
-            InitializeComponent();
-        }
+        public MenuButton() => InitializeComponent();
 
         public string Caption
         {

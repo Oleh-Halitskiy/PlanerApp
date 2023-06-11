@@ -32,11 +32,6 @@ namespace WPF_FrontEnd
             FirstCalendarInit();
         }
 
-        public void RefreshCurrentItems()
-        {
-            FilterNotesByDate(MainCalendar.SelectedDate.Value);  
-        }
-
         private void FirstCalendarInit()
         {
             currentItems = new ObservableCollection<Item>();
@@ -57,38 +52,6 @@ namespace WPF_FrontEnd
             MonthNameLabelRight.Text = MainCalendar.DisplayDate.ToString("MMMM");
             CurrentDayNumber.Text = MainCalendar.SelectedDate.Value.Day.ToString();
             FilterNotesByDate(MainCalendar.SelectedDate.Value.Date);
-        }
-
-        private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-
-        private void lblNote_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            txtNote.Focus();
-        }
-
-        private void lblTime_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            txtTime.Focus();
-        }
-
-        private void txtNote_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtNote.Text) && txtNote.Text.Length > 0)
-                lblNote.Visibility = Visibility.Collapsed;
-            else
-                lblNote.Visibility = Visibility.Visible;
-        }
-
-        private void txtTime_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtTime.Text) && txtTime.Text.Length > 0)
-                lblTime.Visibility = Visibility.Collapsed;
-            else
-                lblTime.Visibility = Visibility.Visible;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -149,21 +112,6 @@ namespace WPF_FrontEnd
 
         }
 
-        private void ScrollLeftButton_Click(object sender, RoutedEventArgs e)
-        {
-            yearSelectionScrollViewer.LineLeft();
-        }
-
-        private void ScrollRightButton_Click(object sender, RoutedEventArgs e)
-        {
-            yearSelectionScrollViewer.LineRight();
-        }
-
-        private void Button_ClickClose(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         // changes every month
         private void MainCalendar_DisplayDateChanged(object sender, System.Windows.Controls.CalendarDateChangedEventArgs e)
         {
@@ -196,11 +144,6 @@ namespace WPF_FrontEnd
             }
         }
 
-        private void LoadUserNotes()
-        {
-            GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
-        }
-
         private void FilterNotesByDate(DateTime date)
         {
             todaysNotes = GlobalVariables.CurrentNotes.Where(note => note.NoteDate.Date == date.Date).ToList();
@@ -217,5 +160,41 @@ namespace WPF_FrontEnd
                 currentItems.Add(item);
             }
         }
+
+        private void txtNote_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtNote.Text) && txtNote.Text.Length > 0)
+                lblNote.Visibility = Visibility.Collapsed;
+            else
+                lblNote.Visibility = Visibility.Visible;
+        }
+
+        private void txtTime_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtTime.Text) && txtTime.Text.Length > 0)
+                lblTime.Visibility = Visibility.Collapsed;
+            else
+                lblTime.Visibility = Visibility.Visible;
+        }
+
+        private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+        public void RefreshCurrentItems() => FilterNotesByDate(MainCalendar.SelectedDate.Value);
+
+        private void LoadUserNotes() => GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
+
+        private void ScrollLeftButton_Click(object sender, RoutedEventArgs e) => yearSelectionScrollViewer.LineLeft();
+
+        private void ScrollRightButton_Click(object sender, RoutedEventArgs e) => yearSelectionScrollViewer.LineRight();
+
+        private void Button_ClickClose(object sender, RoutedEventArgs e) => this.Close();
+
+        private void lblNote_MouseDown(object sender, MouseButtonEventArgs e) => txtNote.Focus();
+
+        private void lblTime_MouseDown(object sender, MouseButtonEventArgs e) => txtTime.Focus();
+
     }
 }

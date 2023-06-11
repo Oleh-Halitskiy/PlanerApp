@@ -17,10 +17,8 @@ namespace RESTServer.DataUtils
         /// <summary>
         /// Construcror for DataAcess class, populates the cnnVal variable
         /// </summary>
-        public DataAccess()
-        {
-            cnnVal = Helper.CnnValue("ProjectDB");
-        }
+        public DataAccess() => cnnVal = Helper.CnnValue("ProjectDB");
+
         /// <summary>
         /// Function that is used to load data from the DB
         /// </summary>

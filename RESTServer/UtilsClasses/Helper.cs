@@ -12,9 +12,6 @@ namespace UtilsClasses
         /// </summary>
         /// <param name="name">The name of connections string in app.config</param>
         /// <returns>Returns string representing connection string</returns>
-        public static string CnnValue(string name)
-        {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
-        }
+        public static string CnnValue(string name) => ConfigurationManager.ConnectionStrings[name].ConnectionString;
     }
 }

@@ -12,20 +12,12 @@ namespace WPF_FrontEnd
     {
         private RESTClient WebClient = new RESTClient();
 
-        public LoginWindow()
-        {
-            InitializeComponent();
-        }
+        public LoginWindow() => InitializeComponent();
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-        }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
 
         private void RegButton_Click(object sender, RoutedEventArgs e)
@@ -67,5 +59,6 @@ namespace WPF_FrontEnd
                 MessageBox.Show("Login or password empty");
             }
         }
+        private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

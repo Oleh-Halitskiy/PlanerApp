@@ -14,9 +14,6 @@ namespace RESTServer.DatabaseOperators
             IEnumerable<User> IUser = await TaskUser;
             return IUser;
         }
-        public async void InsertUser(User user)
-        {
-            await dataAccess.SaveData("dbo.spInsertUser", new { user.FirstName, user.LastName, user.Login, user.Password, user.Email });
-        }
+        public async void InsertUser(User user) => await dataAccess.SaveData("dbo.spInsertUser", new { user.FirstName, user.LastName, user.Login, user.Password, user.Email });
     }
 }

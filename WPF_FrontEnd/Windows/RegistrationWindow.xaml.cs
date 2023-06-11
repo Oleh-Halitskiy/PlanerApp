@@ -12,14 +12,10 @@ namespace WPF_FrontEnd
     public partial class RegistrationWindow : Window
     {
         private RESTClient WebClient = new RESTClient();
+
         public RegistrationWindow()
         {
             InitializeComponent();
-        }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
         }
 
         private void RegButton_Click(object sender, RoutedEventArgs e)
@@ -47,9 +43,13 @@ namespace WPF_FrontEnd
                 MessageBox.Show("One of the fields is empty check your input");
             }
         }
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Close();    
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e) => Close();
     }
 }
