@@ -146,8 +146,8 @@
 
                         </StackPanel>
 
-                        <Button Style="{StaticResource button}" Grid.Column="1">
-                            <fa:ImageAwesome Icon="PlusCircle" Width="28" Height="28" Foreground="#f9f9f9" MouseDown="ImageAwesome_MouseDown" />
+                        <Button x:Name="AddButton" Style="{StaticResource button}" Grid.Column="1" Click="AddButton_Click">
+                            <fa:ImageAwesome Icon="PlusCircle" Width="28" Height="28" Foreground="#f9f9f9"/>
                         </Button>
                     </Grid>
                 </Border>

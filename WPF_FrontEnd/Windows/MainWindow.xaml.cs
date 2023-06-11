@@ -97,20 +97,23 @@ namespace WPF_FrontEnd
             else
                 lblTime.Visibility = Visibility.Visible;
         }
-        private void ImageAwesome_MouseDown(object sender, MouseButtonEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtNote.Text) && !string.IsNullOrEmpty(txtTime.Text))
+            if (!string.IsNullOrEmpty(txtNote.Text) && !string.IsNullOrEmpty(txtTime.Text))
             {
                 Note note = new Note(txtNote.Text, txtTime.Text, GlobalVariables.CurrentUser.ID, MainCalendar.SelectedDate.Value.Date, false);
                 WebClient.InsertNote(note);
                 GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
                 FilterNotesByDate(MainCalendar.SelectedDate.Value);
+                txtNote.Text = "";
+                txtTime.Text = "";
             }
             else
             {
                 MessageBox.Show("One of the fields is empty");
             }
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // setting color to grey back for previous button
