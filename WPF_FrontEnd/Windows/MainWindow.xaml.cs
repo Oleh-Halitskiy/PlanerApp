@@ -40,7 +40,11 @@ namespace WPF_FrontEnd
             InitializeComponent();
             FirstCalendarInit();
         }
-
+        public void RefreshCurrentItems()
+        {
+            currentItems.Clear();
+            FilterNotesByDate(MainCalendar.SelectedDate.Value);
+        }
         private void FirstCalendarInit()
         {
             currentItems = new ObservableCollection<Item>();
@@ -60,6 +64,7 @@ namespace WPF_FrontEnd
             MonthNameLabel.Text = MainCalendar.DisplayDate.ToString("MMMM");
             MonthNameLabelRight.Text = MainCalendar.DisplayDate.ToString("MMMM");
             CurrentDayNumber.Text = MainCalendar.SelectedDate.Value.Day.ToString();
+            FilterNotesByDate(MainCalendar.SelectedDate.Value.Date);
         }
 
         private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -95,7 +100,17 @@ namespace WPF_FrontEnd
         }
         private void ImageAwesome_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            if(!string.IsNullOrEmpty(txtNote.Text) && !string.IsNullOrEmpty(txtTime.Text))
+            {
+                Note note = new Note(txtNote.Text, txtTime.Text, GlobalVariables.CurrentUser.ID, MainCalendar.SelectedDate.Value.Date, false);
+                WebClient.InsertNote(note);
+                GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
+                FilterNotesByDate(MainCalendar.SelectedDate.Value);
+            }
+            else
+            {
+                MessageBox.Show("One of the fields is empty");
+            }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
