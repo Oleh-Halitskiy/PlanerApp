@@ -10,16 +10,32 @@ namespace WPF_FrontEnd
     /// </summary>
     public partial class LoginWindow : Window
     {
+        /// <summary>
+        /// Variable that hold ref to rest client
+        /// </summary>
         private RESTClient WebClient = new RESTClient();
 
+        /// <summary>
+        /// Default ctor
+        /// </summary>
         public LoginWindow() => InitializeComponent();
 
+        /// <summary>
+        /// Event for dragging the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
 
+        /// <summary>
+        /// Method that holds login for when registration button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegButton_Click(object sender, RoutedEventArgs e)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow();
@@ -27,7 +43,11 @@ namespace WPF_FrontEnd
             registrationWindow.ShowDialog();
             Show(); 
         }
-
+        /// <summary>
+        /// Method that holds login for when login button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(LoginTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Password))

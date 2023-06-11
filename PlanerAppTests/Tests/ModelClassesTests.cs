@@ -2,8 +2,14 @@
 
 namespace PlanerAppTests.Tests
 {
+    /// <summary>
+    /// Provides unit tests for the model classes.
+    /// </summary>
     public class ModelClassesTests
     {
+        /// <summary>
+        /// Tests the setting of properties in the User class.
+        /// </summary>
         [Fact]
         public void User_SetProperties_PropertiesAreSetCorrectly()
         {
@@ -25,6 +31,9 @@ namespace PlanerAppTests.Tests
             Assert.Equal(email, user.Email);
         }
 
+        /// <summary>
+        /// Tests the setting of properties in the Note class.
+        /// </summary>
         [Fact]
         public void Note_SetProperties_PropertiesAreSetCorrectly()
         {

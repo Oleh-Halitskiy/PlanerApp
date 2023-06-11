@@ -11,10 +11,21 @@ namespace WPF_FrontEnd
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        /// <summary>
+        /// Variable for rest client
+        /// </summary>
         private RESTClient WebClient = new RESTClient();
 
+        /// <summary>
+        /// Default constuctor for window initialization
+        /// </summary>
         public RegistrationWindow() => InitializeComponent();
 
+        /// <summary>
+        /// Event that fires when Registration button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegButton_Click(object sender, RoutedEventArgs e)
         {
             if(!string.IsNullOrEmpty(FNTextBox.Text) &&
@@ -41,12 +52,22 @@ namespace WPF_FrontEnd
             }
         }
 
+        /// <summary>
+        /// Event for dragging window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
 
+        /// <summary>
+        /// Event for closing window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e) => Close();
     }
 }

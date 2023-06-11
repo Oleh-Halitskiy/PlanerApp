@@ -10,8 +10,14 @@ using System.Threading.Tasks;
 
 namespace PlanerAppTests.Tests
 {
+    /// <summary>
+    /// Provides unit tests for the DataAccess class.
+    /// </summary>
     public class DataAccessTest
     {
+        /// <summary>
+        /// Tests the general data access save operations.
+        /// </summary>
         [Fact]
         public async Task GeneralDataAccessSaveTest()
         {
@@ -32,6 +38,9 @@ namespace PlanerAppTests.Tests
             }
         }
 
+        /// <summary>
+        /// Tests the general data access load operation.
+        /// </summary>
         [Fact]
         public void GeneralDataAccessLoadTest()
         {
@@ -53,18 +62,25 @@ namespace PlanerAppTests.Tests
                 Assert.Equal(expectedlist[2].UserID, actual[2].UserID);
             }
         }
+
+        /// <summary>
+        /// Represents a processor class for database operations.
+        /// </summary>
         public class DBprocessor
         {
-            /// <summary>
-            /// Mock IDataAccess object
-            /// </summary>
             private readonly IDataAccess daacc;
+
+            /// <summary>
+            /// Initializes a new instance of the DBprocessor class.
+            /// </summary>
+            /// <param name="dataAccess">The data access object to use.</param>
             public DBprocessor(IDataAccess dataAccess) => daacc = dataAccess;
 
             /// <summary>
-            /// Mock function for receiving Notes from database
+            /// Loads notes by user ID from the database.
             /// </summary>
-            /// <returns></returns>
+            /// <param name="UserID">The user ID.</param>
+            /// <returns>A list of notes.</returns>
             public List<Note> LoadNotesByUserID(int UserID)
             {
                 User user = new User();
@@ -74,15 +90,23 @@ namespace PlanerAppTests.Tests
                 List<Note> list = resutlts.ToList();
                 return list;
             }
+
             /// <summary>
-            /// Mock function for sending Note to the database
+            /// Inserts a note into the database.
             /// </summary>
-            /// <param name="log"></param>
-            /// <returns></returns>
+            /// <param name="note">The note to insert.</param>
             public async Task InsertNote(Note note) => await daacc.SaveData("dbo.spInsertNote", new { note.Title, note.Time, note.UserID, note.NoteDate, note.IsChecked });
 
+            /// <summary>
+            /// Updates a note in the database.
+            /// </summary>
+            /// <param name="note">The note to update.</param>
             public async void UpdateNote(Note note) => await daacc.SaveData("dbo.spUpdateNoteByID", new { note.ID, note.Title, note.Time, note.IsChecked });
 
+            /// <summary>
+            /// Deletes a note from the database by ID.
+            /// </summary>
+            /// <param name="id">The ID of the note to delete.</param>
             public async void DeleteNoteByID(int id)
             {
                 Note note = new Note();
@@ -90,22 +114,23 @@ namespace PlanerAppTests.Tests
                 await daacc.SaveData("dbo.spDeleteNoteByID", new { note.ID });
             }
         }
+
         /// <summary>
-        /// Mocks the return query from database
+        /// Mocks the return query from the database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A task containing the list of notes.</returns>
         public Task<IEnumerable<Note>> GetNotes()
         {
             Note note = new Note("Note Title1", "19.00 - 20.00", 1, DateTime.Today, false);
             Note note1 = new Note("Note Title2", "19.00 - 20.00", 2, DateTime.Today, false);
             Note note2 = new Note("Note Title3", "19.00 - 20.00", 3, DateTime.Today, false);
             var list = new List<Note>
-            {
-                note,
-                note1,
-                note2
-            };
-            return Task.FromResult<IEnumerable<Note>>(list); ;
+        {
+            note,
+            note1,
+            note2
+        };
+            return Task.FromResult<IEnumerable<Note>>(list);
         }
     }
 }

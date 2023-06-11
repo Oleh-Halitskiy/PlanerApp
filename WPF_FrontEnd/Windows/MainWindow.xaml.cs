@@ -18,20 +18,45 @@ namespace WPF_FrontEnd
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// variable that holds rest client
+        /// </summary>
         private RESTClient WebClient;
+
+        /// <summary>
+        /// reference to the previously pressed button in array of year button
+        /// </summary>
         private Button previouslyPressedYearBT;
+
+        /// <summary>
+        /// reference to the previously pressed button in array of month button
+        /// </summary>
         private Button previouslyPressedMonthBT;
+
+        /// <summary>
+        /// List that holds current date notes
+        /// </summary>
         private List<Note> todaysNotes;
+        /// <summary>
+        /// List that is binded to list box and holds current items
+        /// </summary>
         private ObservableCollection<Item> currentItems;
 
         public ObservableCollection<Item> CurrentItems { get => currentItems; set => currentItems = value; }
 
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             FirstCalendarInit();
         }
 
+        /// <summary>
+        /// Method that is used for setting variables and lauching the calendar in working state
+        /// </summary>
         private void FirstCalendarInit()
         {
             currentItems = new ObservableCollection<Item>();
@@ -54,6 +79,11 @@ namespace WPF_FrontEnd
             FilterNotesByDate(MainCalendar.SelectedDate.Value.Date);
         }
 
+        /// <summary>
+        /// Event for when add button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtNote.Text) && !string.IsNullOrEmpty(txtTime.Text))
@@ -71,6 +101,11 @@ namespace WPF_FrontEnd
             }
         }
 
+        /// <summary>
+        /// Event for array of month buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // setting color to grey back for previous button
@@ -91,6 +126,11 @@ namespace WPF_FrontEnd
             clickedButton.Foreground = (Brush)bc.ConvertFrom("#C73F69");
         }
 
+        /// <summary>
+        /// Event for array of year buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickYear(object sender, RoutedEventArgs e)
         {
             // setting color to grey back for previous button
@@ -112,6 +152,11 @@ namespace WPF_FrontEnd
 
         }
 
+        /// <summary>
+        /// Event for setting current date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         // changes every month
         private void MainCalendar_DisplayDateChanged(object sender, System.Windows.Controls.CalendarDateChangedEventArgs e)
         {
@@ -119,6 +164,11 @@ namespace WPF_FrontEnd
             MonthNameLabelRight.Text = MainCalendar.DisplayDate.ToString("MMMM");
         }
 
+        /// <summary>
+        /// Event for setting current date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         // changes every click
         private void MainCalendar_OnSelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -127,6 +177,9 @@ namespace WPF_FrontEnd
             FilterNotesByDate(MainCalendar.SelectedDate.Value);
         }
 
+        /// <summary>
+        /// Sets current month in calendar
+        /// </summary>
         private void SetCurrentWeek()
         {
             var bc = new BrushConverter();
@@ -144,12 +197,20 @@ namespace WPF_FrontEnd
             }
         }
 
+        /// <summary>
+        /// Method that is used to filter notes from db for selected day
+        /// </summary>
+        /// <param name="date">Current date in calendar</param>
         private void FilterNotesByDate(DateTime date)
         {
             todaysNotes = GlobalVariables.CurrentNotes.Where(note => note.NoteDate.Date == date.Date).ToList();
             SetObservableCollectionFromList(todaysNotes);
         }
 
+        /// <summary>
+        /// Method that converts Notes to Items
+        /// </summary>
+        /// <param name="notes">List of Notes</param>
         private void SetObservableCollectionFromList(List<Note> notes)
         {
             CurrentItems.Clear();
@@ -161,6 +222,11 @@ namespace WPF_FrontEnd
             }
         }
 
+        /// <summary>
+        /// Event for hiding hint when typing 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtNote_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtNote.Text) && txtNote.Text.Length > 0)
@@ -169,6 +235,11 @@ namespace WPF_FrontEnd
                 lblNote.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Event for hiding hint when typing 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtTime_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtTime.Text) && txtTime.Text.Length > 0)
@@ -177,23 +248,61 @@ namespace WPF_FrontEnd
                 lblTime.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Event for dragging the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+        /// <summary>
+        /// Method for refreshing the window with current items
+        /// </summary>
         public void RefreshCurrentItems() => FilterNotesByDate(MainCalendar.SelectedDate.Value);
 
+        /// <summary>
+        /// Method that loads all the Note for current user from DB
+        /// </summary>
         private void LoadUserNotes() => GlobalVariables.CurrentNotes = WebClient.GetNotesByUserID(GlobalVariables.CurrentUser.ID);
 
+        /// <summary>
+        /// Method for scrolling left in year section
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScrollLeftButton_Click(object sender, RoutedEventArgs e) => yearSelectionScrollViewer.LineLeft();
 
+        /// <summary>
+        /// Method for scrolling right in year section
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScrollRightButton_Click(object sender, RoutedEventArgs e) => yearSelectionScrollViewer.LineRight();
 
+        /// <summary>
+        /// Method for closing window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ClickClose(object sender, RoutedEventArgs e) => this.Close();
 
+
+        /// <summary>
+        /// Method for focusing on text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblNote_MouseDown(object sender, MouseButtonEventArgs e) => txtNote.Focus();
 
+        /// <summary>
+        /// Method for focusing on text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblTime_MouseDown(object sender, MouseButtonEventArgs e) => txtTime.Focus();
 
     }
