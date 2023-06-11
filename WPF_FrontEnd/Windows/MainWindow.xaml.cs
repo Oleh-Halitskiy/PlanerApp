@@ -42,8 +42,7 @@ namespace WPF_FrontEnd
         }
         public void RefreshCurrentItems()
         {
-            currentItems.Clear();
-            FilterNotesByDate(MainCalendar.SelectedDate.Value);
+            FilterNotesByDate(MainCalendar.SelectedDate.Value);  
         }
         private void FirstCalendarInit()
         {
@@ -199,7 +198,7 @@ namespace WPF_FrontEnd
         }
         private void FilterNotesByDate(DateTime date)
         {
-            todaysNotes = GlobalVariables.CurrentNotes.Where(note => note.NoteDate.Date == date).ToList();
+            todaysNotes = GlobalVariables.CurrentNotes.Where(note => note.NoteDate.Date == date.Date).ToList();
             SetObservableCollectionFromList(todaysNotes);
         }
         private void SetObservableCollectionFromList(List<Note> notes)
