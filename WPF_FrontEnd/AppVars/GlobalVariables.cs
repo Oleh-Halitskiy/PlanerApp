@@ -9,5 +9,7 @@ namespace WPF_FrontEnd.AppVars
         public static User CurrentUser { get; set; }
 
         public static List<Note> CurrentNotes { get; set; }
+
+        public static MainWindow MainWindow { get; set; }
     }
 }
